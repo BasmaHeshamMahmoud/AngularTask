@@ -1,7 +1,76 @@
-<!-- <p>products works!</p> -->
-<!-- <h1> tag to display store name (Use angular Expression {{}}). -->
-<h1>{{ storeName }}</h1>
-<!-- <img> tag to display store logo (Use property binding [src]). -->
-<img [src]="storeLogo" alt="Loading Store Logo" />
-<!-- <h3> tag to display this text: “We offer an explicit discount of:” + Discount value from the discount property (Use angular Expression {{}}). -->
-<h3>We offer an explicit discount of: {{ Discount }}</h3>
+<div class="centeralize">
+  <!-- <img> tag to display store logo (Use property binding [src]). -->
+  <img class="resize" [src]="storeLogo" alt="Loading Store Logo" />
+  <!-- <h1> tag to display store name (Use angular Expression {{}}). -->
+  <h1>{{ storeName }}</h1>
+</div>
+
+<!-- Make a table the display the Products list (Use structural directive *ngFor). -->
+<div *ngIf="IsPurshased; then visibleTable; else nonvisible"></div>
+<ng-template #visibleTable>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of ProductList">
+        <th scope="row">{{ item?.id }}</th>
+        <td>{{ item?.name | titlecase }}</td>
+        <td>{{ item?.quantity }}</td>
+        <td>{{ item?.price | currency }}</td>
+        <td>
+          <img class="resize" [src]="item?.img" alt="Loading Product Image" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<ng-template #nonvisible>
+  <div>Thanks for purchasing from our Store {{ ClientName | titlecase }}</div>
+</ng-template>
+
+<br />
+<br />
+<!-- Make an input where user enters his Name, and use two-way binding (Banana operator) to bind it to “ClientName” property in the class.-->
+<input type="text" [(ngModel)]="ClientName" />
+{{ ClientName }}
+
+<!-- Make a button “Buy”,that when clicked hides the table,and shows another div saying “Thanks for purchasing from our Store” + ClientName Entered-->
+<button
+  style="margin-left: 20px"
+  type="button"
+  class="btn btn-primary resize"
+  (click)="toggleTable()"
+>
+  Buy
+</button>
+<br />
+<!-- view Discount -->
+<h3 *ngIf="Discount != 'No Discount'; then Offer"></h3>
+<ng-template #Offer>
+  <h3>We offer an explicit discount of: {{ Discount | percent }}</h3>
+</ng-template>
+
+<br />
+<br />
+<h3>Question Two</h3>
+<!-- For the store name display it as upper case using pipes -->
+<div>
+  <h4>For the store name display it as upper case using pipes</h4>
+  {{ storeName }}
+</div>
+
+<br />
+<br />
+<!-- Discount will be in percent using pipes -->
+<div>
+  <h4>Discount will be in percent using pipes</h4>
+  {{ Discount | percent }}
+</div>

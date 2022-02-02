@@ -2,7 +2,7 @@
 // Set of named constants values
 // string enums
 export enum DiscountOffers {
-  discountOne = 'No Discount',
-  discountTwo = '10%',
-  discountThree = '15%',
+  noDiscount = 'No Discount',
+  tenDiscount = 0.1,
+  fifteenDiscount = 0.15,
 }

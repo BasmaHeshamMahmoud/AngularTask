@@ -16,9 +16,10 @@ export class ProductsComponent implements OnInit {
   CategoryList: ICategory[];
   ClientName: string;
   IsPurshased: boolean;
+  showTable: boolean = false;
 
   constructor() {
-    this.Discount = DiscountOffers.discountTwo;
+    this.Discount = DiscountOffers.tenDiscount;
     this.storeName = 'StoreAppName';
     this.storeLogo = '../../assets/images/logoStoreImage.jpg';
     this.ProductList = [
@@ -62,8 +63,10 @@ export class ProductsComponent implements OnInit {
       },
     ];
     this.ClientName = 'Client One';
-    this.IsPurshased = false;
+    this.IsPurshased = true;
   }
-
+  toggleTable(): void {
+    this.IsPurshased = !this.IsPurshased;
+  }
   ngOnInit(): void {}
 }
