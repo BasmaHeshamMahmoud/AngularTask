@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ProductsComponent } from './products/products.component';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'myfirstapp-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angDemo';
+  @ViewChild(ProductsComponent) child: ProductsComponent;
+  listProducts() {
+    this.child.renderValues();
+  }
+  toggleProducts() {
+    this.child.toggleTable();
+  }
 }

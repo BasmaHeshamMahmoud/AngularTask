@@ -74,3 +74,31 @@
   <h4>Discount will be in percent using pipes</h4>
   {{ Discount | percent }}
 </div>
+<!-- Lab 3 -->
+<br />
+<div *ngIf="">
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ProductList">
+          <th scope="row">{{ item?.id }}</th>
+          <td>{{ item?.name | titlecase }}</td>
+          <td>{{ item?.quantity }}</td>
+          <td>{{ item?.price | currency }}</td>
+          <td>
+            <img class="resize" [src]="item?.img" alt="Loading Product Image" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
