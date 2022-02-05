@@ -4,7 +4,15 @@
   <!-- <h1> tag to display store name (Use angular Expression {{}}). -->
   <h1>{{ storeName }}</h1>
 </div>
-
+<br />
+<button
+  style="width: 150px"
+  type="button"
+  class="btn btn-primary resize"
+  (click)="renderValues()"
+>
+  Show Products
+</button>
 <!-- Make a table the display the Products list (Use structural directive *ngFor). -->
 <div *ngIf="IsPurshased; then visibleTable; else nonvisible"></div>
 <ng-template #visibleTable>
@@ -52,6 +60,7 @@
   Buy
 </button>
 <br />
+
 <!-- view Discount -->
 <h3 *ngIf="Discount != 'No Discount'; then Offer"></h3>
 <ng-template #Offer>
@@ -60,20 +69,20 @@
 
 <br />
 <br />
-<h3>Question Two</h3>
+<!-- <h3>Question Two</h3> -->
 <!-- For the store name display it as upper case using pipes -->
-<div>
+<!-- <div>
   <h4>For the store name display it as upper case using pipes</h4>
   {{ storeName }}
 </div>
 
 <br />
-<br />
+<br /> -->
 <!-- Discount will be in percent using pipes -->
-<div>
+<!-- <div>
   <h4>Discount will be in percent using pipes</h4>
   {{ Discount | percent }}
-</div>
+</div> -->
 <!-- Lab 3 -->
 <br />
 <div *ngIf="">
