@@ -18,4 +18,17 @@ export class PostServicesService {
       })
     );
   }
+  listSinPost(id: number): Observable<IPost[]> {
+    const post = this.http
+      .get<IPost[]>(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .pipe();
+    return post;
+  }
+
+  getComments(postId: number): Observable<IPost[]> {
+    const comment = this.http.get<IPost[]>(
+      `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
+    );
+    return comment;
+  }
 }

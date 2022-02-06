@@ -1,3 +1,4 @@
+import { IPost } from './../Shared Classes and types/interfaces';
 import { PostServicesService } from './../Services/post-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -13,7 +14,7 @@ export class PostComponentComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  listPosts: any;
+  listPosts: IPost[] = [];
   postId: any;
   ngOnInit(): void {
     this.postService.listPosts().subscribe((postData) => {
