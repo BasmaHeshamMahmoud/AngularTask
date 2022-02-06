@@ -1,0 +1,29 @@
+<!-- <p>comments works!</p> -->
+
+<div class="container">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>PostID</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Body</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of listComments">
+        <td>{{ comment.postId }}</td>
+        <td>{{ comment.id }}</td>
+        <td>{{ comment.name }}</td>
+        <td>{{ comment.email }}</td>
+        <td>{{ comment.body }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <button class="btn btn-outline-secondary btn-lg" (click)="goToPostsList()">
+    Back
+  </button>
+</div>

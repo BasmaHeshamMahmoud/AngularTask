@@ -1,20 +1,29 @@
 <!-- <p>post-component works!</p> -->
 <div class="container">
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>UserID</th>
         <th>ID</th>
         <th>Title</th>
         <th>Body</th>
+        <th>Comments</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let post of listPosts">
+      <tr *ngFor="let post of listPosts" [class.selected]="isSelected(post)">
         <td>{{ post.userId }}</td>
         <td>{{ post.id }}</td>
         <td>{{ post.title }}</td>
         <td>{{ post.body }}</td>
+        <td>
+          <button
+            class="btn btn-outline-secondary btn-lg"
+            (click)="goToCommentsList(post)"
+          >
+            Comments
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

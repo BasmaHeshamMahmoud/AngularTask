@@ -54,3 +54,12 @@ export interface ICompany {
   catchPhrase: string;
   bs: string;
 }
+
+// Interface Comment
+export interface IComment {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}

@@ -7,7 +7,11 @@ import { ICategory } from './../Shared Classes and types/interfaces';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  storeName: string;
+  storeLogo: string;
   constructor() {
+    this.storeName = 'StoreAppName';
+    this.storeLogo = '../../assets/images/logoStoreImage.jpg';
     this.CategoryList = [
       {
         id: 11,
