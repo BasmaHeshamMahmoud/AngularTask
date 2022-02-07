@@ -1,90 +1,149 @@
-<!-- <form>
-  <div class="form-group">
-    <label for="exampleInputusername">User Name:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="exampleInputusername"
-      placeholder="Username..."
-    />
-  </div>
-  <div class="form-group">
-    <label for="exampleInputemail">Email :</label>
-    <input
-      type="email"
-      class="form-control"
-      id="exampleInputemail"
-      placeholder="Email..."
-    />
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password :</label>
-    <input
-      type="password"
-      class="form-control"
-      id="exampleInputPassword1"
-      placeholder="Password..."
-    />
-  </div>
-  <div class="form-group">
-    <label for="exampleInputconfirmpassword">Confirm Password :</label>
-    <input
-      type="password"
-      class="form-control"
-      id="exampleInputconfirmpassword"
-      placeholder="Confirm Password..."
-    />
-  </div>
+<div class="container">
+  <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+    {{ userForm.value | json }}
+    <br />
+    <br />
+    {{ userModel | json }}
+    <div class="mb-3 row">
+      <label for="inputusername" class="col-sm-2 col-form-label"
+        >Username :</label
+      >
+      <div class="col-sm-10">
+        <input
+          type="text"
+          required
+          class="form-control"
+          id="inputusername"
+          name="txtusername"
+          [(ngModel)]="userModel.name"
+          #name="ngModel"
+          [class.is-invalid]="name.invalid && name.touched"
+          pattern="^(?=.*[a-z])(?=.*[A-Z]).+$"
+        />
+        <small class="text-danger" [class.d-none]="name.valid || name.untouched"
+          >Username must contains only capital and smal characters</small
+        >
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="exampleInputEmail1" class="col-sm-2 col-form-label"
+        >Email address :</label
+      >
+      <div class="col-sm-10">
+        <input
+          type="email"
+          required
+          class="form-control"
+          id="exampleInputEmail1"
+          name="txtemail"
+          [(ngModel)]="userModel.email"
+          #email="ngModel"
+          [class.is-invalid]="email.invalid && email.touched"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+        />
+        <div
+          *ngIf="email.errors && (email.touched || email.dirty)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!email.errors?.['pattern']">Invalid email...</div>
+        </div>
+        <!-- <small
+          class="text-danger"
+          [class.d-none]="email.valid || email.untouched"
+          >Email is required...</small
+        > -->
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="exampleInputPassword1" class="col-sm-2 col-form-label"
+        >Password :</label
+      >
+      <div class="col-sm-10">
+        <input
+          required
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          name="txtpassword"
+          [(ngModel)]="userModel.password"
+          #pass="ngModel"
+          [class.is-invalid]="pass.invalid && pass.touched"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}"
+        />
+        <!--  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/gm" -->
+        <div *ngIf="pass.touched && pass.invalid" class="alert alert-danger">
+          <div *ngIf="pass.errors?.['required']">Password is required.</div>
+        </div>
+        <div
+          *ngIf="pass.errors && (pass.touched || pass.dirty)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!pass.errors?.['pattern']">Invalid Pattern...</div>
+        </div>
+        <!-- <small class="text-danger" [class.d-none]="pass.valid || pass.untouched"
+          >Password is required...</small
+        > -->
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="exampleInputPassword2" class="col-sm-2 col-form-label"
+        >Confirm Password :</label
+      >
+      <div class="col-sm-10">
+        <input
+          required
+          type="password"
+          class="form-control"
+          id="exampleInputPassword2"
+          name="txtconfirmpassword"
+          [(ngModel)]="userModel.confirmpass"
+          #confirmpass="ngModel"
+          [class.is-invalid]="confirmpass.invalid && confirmpass.touched"
+        />
+        <div
+          *ngIf="confirmpass.touched && confirmpass.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="confirmpass.errors?.['required']">
+            Password is required.
+          </div>
 
-  <select class="form-select" aria-label="Default select example">
-    <option selected>Open this select menu</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
-  <button type="submit" class="btn btn-default">Register</button>
-</form> -->
-<form>
-  <div class="mb-3 row">
-    <label for="inputusername" class="col-sm-2 col-form-label"
-      >Username :</label
-    >
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputusername" />
+          <div *ngIf="confirmpass.errors?.['confirmedValidator']">
+            Password and Confirm Password must be match.
+          </div>
+        </div>
+        <!-- <small
+          class="text-danger"
+          [class.d-none]="confirmpass.valid || confirmpass.untouched"
+          >Confirm Password is required...</small
+        > -->
+      </div>
     </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="exampleInputEmail1" class="col-sm-2 col-form-label"
-      >Email address :</label
+    <select
+      required
+      class="form-select form-select-lg mb-3"
+      aria-label=".form-select-lg example"
+      name="ddlOptions"
+      [(ngModel)]="userModel.ddoption"
+      #Soption="ngModel"
+      [class.is-invalid]="Soption.invalid && Soption.touched"
     >
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="exampleInputEmail1" />
-    </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="exampleInputPassword1" class="col-sm-2 col-form-label"
-      >Password :</label
+      <option selected disabled>About Us</option>
+      <option *ngFor="let topic of topics">{{ topic }}</option>
+    </select>
+    <small
+      class="text-danger"
+      [class.d-none]="Soption.valid || Soption.untouched"
+      >You must select one of these options...</small
     >
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="exampleInputPassword1" />
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button
+        type="submit"
+        class="btn btn-outline-info btn-lg"
+        [disabled]="userForm.invalid || pass.value != confirmpass.value"
+      >
+        Rigester
+      </button>
     </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="exampleInputPassword2" class="col-sm-2 col-form-label"
-      >Confirm Password :</label
-    >
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="exampleInputPassword2" />
-    </div>
-  </div>
-  <select
-    class="form-select form-select-lg mb-3"
-    aria-label=".form-select-lg example"
-  >
-    <option selected disabled>About Us</option>
-    <option *ngFor="let topic of topics">{{ topic }}</option>
-  </select>
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <button type="button" class="btn btn-outline-info btn-lg">Rigester</button>
-  </div>
-</form>
+  </form>
+</div>
