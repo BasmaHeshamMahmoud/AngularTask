@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginUser } from '../login-user';
+import { EnrollmentService } from '../Services/enrollment.service';
 
 @Component({
   selector: 'app-log-in',
@@ -9,10 +10,18 @@ import { LoginUser } from '../login-user';
 export class LogInComponent implements OnInit {
   logUser: LoginUser = new LoginUser('', '');
 
-  constructor() {}
+  constructor(private enrollment: EnrollmentService) {}
 
   onSubmit() {
     console.log(this.logUser);
+    this.enrollment.login(this.logUser).subscribe(
+      (res) => {
+        console.log('Success', res);
+      },
+      (error) => {
+        console.log('Erorr', error);
+      }
+    );
   }
 
   ngOnInit(): void {}

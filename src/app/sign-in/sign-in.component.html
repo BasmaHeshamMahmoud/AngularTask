@@ -1,5 +1,5 @@
 <div class="container">
-  <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+  <!-- <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()">
     {{ userForm.value | json }}
     <br />
     <br />
@@ -47,11 +47,6 @@
         >
           <div [hidden]="!email.errors?.['pattern']">Invalid email...</div>
         </div>
-        <!-- <small
-          class="text-danger"
-          [class.d-none]="email.valid || email.untouched"
-          >Email is required...</small
-        > -->
       </div>
     </div>
     <div class="mb-3 row">
@@ -70,7 +65,7 @@
           [class.is-invalid]="pass.invalid && pass.touched"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}"
         />
-        <!--  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/gm" -->
+
         <div *ngIf="pass.touched && pass.invalid" class="alert alert-danger">
           <div *ngIf="pass.errors?.['required']">Password is required.</div>
         </div>
@@ -80,9 +75,6 @@
         >
           <div [hidden]="!pass.errors?.['pattern']">Invalid Pattern...</div>
         </div>
-        <!-- <small class="text-danger" [class.d-none]="pass.valid || pass.untouched"
-          >Password is required...</small
-        > -->
       </div>
     </div>
     <div class="mb-3 row">
@@ -112,11 +104,6 @@
             Password and Confirm Password must be match.
           </div>
         </div>
-        <!-- <small
-          class="text-danger"
-          [class.d-none]="confirmpass.valid || confirmpass.untouched"
-          >Confirm Password is required...</small
-        > -->
       </div>
     </div>
     <select
@@ -145,5 +132,93 @@
         Rigester
       </button>
     </div>
-  </form>
+  </form> -->
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="registerationForm">
+        <div class="form-group">
+          <label>User Name:</label>
+          <input
+            formControlName="userName"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="userName?.invalid && userName?.touched"
+          />
+          <div *ngIf="userName?.invalid && userName?.touched">
+            <small class="text-danger" *ngIf=" userName?.errors?.['required']"
+              >User name is required...</small
+            >
+            <small class="text-danger" *ngIf=" userName?.errors?.['minlength']"
+              >User name must be at least 5 characters...</small
+            >
+            <small
+              class="text-danger"
+              *ngIf=" userName?.errors?.['forbiddenName']"
+              >{{ userName?.errors?.['forbiddenName'].value }} is not allowed...
+            </small>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+          <label>Password:</label>
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label>Confirm Password:</label>
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            class="form-control"
+          />
+          <small
+            class="text-danger"
+            *ngIf="registerationForm.errors?.['misMatch']"
+            >Password and Confirm Password is not match.</small
+          >
+        </div>
+        <br />
+        <div formGroupName="address">
+          <div class="form-group">
+            <label>State:</label>
+            <input formControlName="state" type="text" class="form-control" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label>City:</label>
+            <input formControlName="city" type="text" class="form-control" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Postal Code:</label>
+            <input
+              formControlName="postalCode"
+              type="text"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-outline-info btn-lg">
+            Register
+          </button>
+        </div>
+        <br />
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            (click)="loadAPIData()"
+          >
+            Get Data
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
